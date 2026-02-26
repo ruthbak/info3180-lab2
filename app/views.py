@@ -1,6 +1,29 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
+import datetime
 
+
+@app.route('/profile')
+def profile():
+    date_joined = datetime.date(2024, 3, 7)
+    joined = "Joined " + format_date_joined(date_joined)
+
+    user = {
+        "full_name": "Ruth Bakare",
+        "username": "r_bakare",
+        "location": "Kingston, Jamaica",
+        "bio": "Heyyy! I'm Ruth, an enthusiastic Computer Science major building projects with Flask and databases. Interested in learning more complex implementations and concepts!",
+        "posts": 10,
+        "following": 173,
+        "followers": 234,
+        "joined": joined,
+        "photo": "images/profile.jpg"
+    }
+
+    return render_template('profile.html', user=user)
+
+def format_date_joined(d):
+    return d.strftime("%B, %Y")
 
 ###
 # Routing for your application.
